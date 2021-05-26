@@ -65,7 +65,7 @@ def main(coverage_tsv, coverage_output, owner, repo_name, commit_hash, diffs):
                 " | {} | \n".format(" | ".join(["line", "function name", "coverage"]))
             )
             fw.write(" | {} | \n".format(" | ".join(["---", "---", "---"])))
-            for (iname, title, func, percept) in file_group:
+            for (_, title, func, percept) in file_group:
                 fw.write(
                     " | {} | \n".format(
                         " | ".join([title, func, coverage_shields(float(percept[:-1]))])
