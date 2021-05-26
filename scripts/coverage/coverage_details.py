@@ -35,8 +35,8 @@ def main(coverage_out, coverage_output, owner, repo_name, commit_hash, diffs):
             fw.write("<summary>{}</summary>\n\n".format(file_group[0][1]))
             for f in file_group:
                 fw.write(
-                    "https://github.com/{}/{}/blob/{}/{}#L{}\n\n".format(
-                        owner, repo_name, commit_hash, fname, int(f[0])
+                    "https://github.com/{}/{}/blob/{}/{}#L{}-L{}\n\n".format(
+                        owner, repo_name, commit_hash, f[1], int(f[0]), int(f[0]) + 4
                     )
                 )
             fw.write("</details>\n")
