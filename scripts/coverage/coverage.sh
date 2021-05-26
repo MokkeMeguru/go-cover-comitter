@@ -27,8 +27,8 @@ echo $(git diff HEAD origin/$3 --name-only)
 python ./scripts/coverage/coverage_stats.py $(git diff HEAD origin/$3 --name-only) --repo $1 --commit_hash $commit_hash
 python ./scripts/coverage/coverage_details.py $(git diff HEAD origin/$3 --name-only) --repo $1 --commit_hash $commit_hash
 
-echo "\n" >>coverage.md
 cat coverage_d.md >>coverage.md
+cat coverage.md
 # rm -f ./cover.out.tmp
 # rm -f ./cover.out
 # rm -f ./cover.tsv
