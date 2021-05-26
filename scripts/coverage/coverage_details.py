@@ -32,11 +32,11 @@ def main(coverage_out, coverage_output, owner, repo_name, commit_hash, diffs):
             file_group = sorted(file_group, key=lambda x: x[0])
 
             fw.write("<details>\n")
-            fw.write("<summary>{}</summary>\n".format(file_group[0][1]))
+            fw.write("<summary>{}</summary>\n\n".format(file_group[0][1]))
             for f in file_group:
                 fw.write(
-                    "https://github.com/{}/{}/blob/{}/{}#L{}\n".format(
-                        owner, repo_name, commit_hash, fname, occurline
+                    "https://github.com/{}/{}/blob/{}/{}#L{}\n\n".format(
+                        owner, repo_name, commit_hash, fname, int(occurline)
                     )
                 )
             fw.write("</details>\n")
