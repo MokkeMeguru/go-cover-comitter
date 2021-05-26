@@ -18,7 +18,7 @@ jobs:
       - run: go version
       - name: build coverage
         run: |
-          sh ./scripts/coverage/coverage.sh ${GITHUB_REPOSITORY} ${{ github.head_ref }} ${{ github.base_ref }}
+          sh ./scripts/coverage/coverage.sh ${{ github.repo }} ${{ github.head_ref }} ${{ github.base_ref }}
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           path: coverage.md

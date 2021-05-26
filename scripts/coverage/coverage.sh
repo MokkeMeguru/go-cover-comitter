@@ -9,6 +9,8 @@ if [ $# != 3 ]; then
 	echo "sh ./scripts/coverage/coverage.sh MokkeMeguru/go-cover-commenter feature/size develop"
 	exit 0
 fi
+echo "repo is :"
+echo $1
 
 # variable
 # git checkout
