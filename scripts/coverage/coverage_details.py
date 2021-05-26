@@ -33,7 +33,7 @@ def main(coverage_out_fname, repo_name, branch_name, diffs):
             file_group = list(file_group)
             file_group = sorted(file_group, key=lambda x: x[0])
             for f in file_group:
-                fw.write("{}:{}: no coverage \n".format(f[1], f[0]))
+                fw.write("{}:{}: no coverage at #L{}\n".format(f[1], f[0], int(f[0])))
 
 
 if __name__ == "__main__":
