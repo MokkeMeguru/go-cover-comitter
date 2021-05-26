@@ -7,7 +7,7 @@ import argparse
 
 coverage_output_file = "coverage_d.md"
 coverage_out_fname = "cover.out"
-repo_name = "go-cover-commenter"
+repo_name = "go-coverage-commenter"
 
 
 def main(coverage_out_fname, repo_name, branch_name, diffs):
@@ -19,9 +19,8 @@ def main(coverage_out_fname, repo_name, branch_name, diffs):
         for line in fr:
             if line.startswith("mode:"):
                 continue
-            base = line.split(repo_name)[-1][
-                1:
-            ]  # internal/domain/size.go:16.2,16.19 1 0
+            base = line.split(repo_name)[-1][1:]
+            # internal/domain/size.go:16.2,16.19 1 0
             t = base.split(":")
             fname, info = t[0], t[1]  # internal/domain/size.go // 16.2,16.19 1 0
             if int(base.split(" ")[-1]) > 0:
