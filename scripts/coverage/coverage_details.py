@@ -5,14 +5,8 @@ from itertools import groupby
 import statistics
 import argparse
 
-coverage_output_file = "coverage_d.md"
-coverage_out_fname = "cover.out"
-repo_name = "go-coverage-commenter"
 
-
-def main(coverage_out_fname, repo_name, branch_name, diffs):
-    coverage_out = Path(coverage_out_fname)
-    coverage_output = Path(coverage_output_file)
+def main(coverage_out, coverage_output, owner, repo_name, commit_hash, diffs):
     coverage_infos = []
 
     with coverage_out.open(mode="r", encoding="utf-8") as fr:
@@ -23,25 +17,47 @@ def main(coverage_out_fname, repo_name, branch_name, diffs):
             # internal/domain/size.go:16.2,16.19 1 0
             t = base.split(":")
             fname, info = t[0], t[1]  # internal/domain/size.go // 16.2,16.19 1 0
+            if fname not in diffs:
+                continue
             if int(base.split(" ")[-1]) > 0:
                 continue
             occurline = float(info.split(",")[0])  # 16.2
             coverage_infos.append((occurline, fname))
 
     with coverage_output.open("w", encoding="utf-8") as fw:
+        fw.write("### Details\n")
+
         for key, file_group in groupby(coverage_infos, key=lambda x: x[1]):
             file_group = list(file_group)
             file_group = sorted(file_group, key=lambda x: x[0])
+
+            fw.write("<details>\n")
+            fw.write("<summary>{}</summary>\n".format(file_group[1]))
             for f in file_group:
-                fw.write("{}:{}: no coverage at #L{}\n".format(f[1], f[0], int(f[0])))
+                fw.write(
+                    "https://github.com/{}/{}/blob/{}/{}#L{}\n".format(
+                        owner, repo_name, commit_hash, fname, occurline
+                    )
+                )
+            fw.write("</details>\n")
 
 
 if __name__ == "__main__":
+    coverage_output_file = "coverage_d.md"
+    coverage_out_fname = "cover.out"
+
     parser = argparse.ArgumentParser(description="go coverage stats helper")
-    parser.add_argument(
-        "--source_branch", type=str, default="develop", help="source branch name"
-    )
     parser.add_argument("target_files", metavar="N", type=str, nargs="+", help="")
+    parser.add_argument("--repo", type=str)
+    parser.add_argument("--commit_hash", type=str)
     args = parser.parse_args()
-    print(args.target_files)
-    main(coverage_out_fname, repo_name, args.source_branch, args.target_files)
+
+    owner, repo_name = args.repo.split("/")
+    main(
+        Path(coverage_out_fname),
+        Path(coverage_output_file),
+        owner,
+        repo_name,
+        args.commit_hash,
+        args.target_files,
+    )
