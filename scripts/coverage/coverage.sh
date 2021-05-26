@@ -31,6 +31,3 @@ python ./scripts/coverage/coverage_details.py $(git diff HEAD origin/$3 --name-o
 
 cat coverage_d.md >>coverage.md
 cat coverage.md
-# rm -f ./cover.out.tmp
-# rm -f ./cover.out
-# rm -f ./cover.tsv
