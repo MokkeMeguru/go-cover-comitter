@@ -4,7 +4,7 @@ if [ $# != 3 ]; then
 	echo "Usage: "
 	echo "sh ./scripts/coverage/coverage.sh <repo> <target_branch_name> <source_branch_name>"
 	echo "Example: "
-	echo "sh ./scripts/coverage/coverage.sh \$GITHUB_REPOSITORY feature/size develop"
+	echo "sh ./scripts/coverage/coverage.sh \${{ GITHUB_REPOSITORY }} feature/size develop"
 	echo "or"
 	echo "sh ./scripts/coverage/coverage.sh MokkeMeguru/go-cover-commenter feature/size develop"
 	exit 0
