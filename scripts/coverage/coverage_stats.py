@@ -57,7 +57,7 @@ def main(coverage_tsv, coverage_output, owner, repo_name, commit_hash, diffs):
             )
             fw.write("<details>\n")
             fw.write(
-                "<summary>{}</summary> (average coverage: {})\n".format(
+                "<summary>{} (average coverage: {})</summary>\n\n".format(
                     key, coverage_shields(mean_percept, "html")
                 )
             )
