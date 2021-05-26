@@ -2,7 +2,7 @@ name: coverage_stats
 
 on:
   pull_request:
-    types: synchronize
+    types: [open, synchronize, reopened]
 
 jobs:
   coverage_comment:
