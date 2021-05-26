@@ -48,7 +48,7 @@ def main(coverage_tsv, coverage_output, owner, repo_name, commit_hash, diffs):
             coverage_funcs.append((file_path, title_link, func, percept))
 
     with coverage_output.open("w", encoding="utf-8") as fw:
-        fw.write("## Coverage Report\n")
+        fw.write("# Coverage Report\n")
 
         for key, file_group in groupby(coverage_funcs, key=lambda x: x[0]):
             file_group = list(file_group)
