@@ -14,8 +14,12 @@ git fetch origin $2
 go test ./internal/... -coverprofile=cover.out.tmp
 cat cover.out.tmp | grep -v "gen.go" >cover.out
 go tool cover -func cover.out -o cover.tsv
+echo "TSV"
+cat cover.tsv
 
 # formatted coverage
+echo "DIFF"
+echo $(git diff HEAD origin/$2 --name-only)
 python ./scripts/coverage/coverage_stats.py $(git diff HEAD origin/$2 --name-only) --source_branch origin/$2
 python ./scripts/coverage/coverage_details.py $(git diff HEAD origin/$2 --name-only) --source_branch origin/$2
 

@@ -9,8 +9,7 @@ import argparse
 coverage_output_file = "coverage.md"
 coverage_tsv_fname = "cover.tsv"
 branch_name = "develop"
-repo_name = "tipstar-gt"
-head_name = "https://github.com/xflagstudio"
+repo_name = "go-coverage-commenter"
 
 base_coverage_shields = {
     "md": " ![](https://img.shields.io/static/v1?label=coverage&message={}%&color={}&style=flat-square) ",
@@ -35,7 +34,7 @@ def main(coverage_tsv_fname, repo_name, branch_name, diffs):
     with coverage_tsv.open(mode="r", encoding="utf-8") as fr:
         for line in fr:
             title, func, percept = re.sub(r"\s+", "\t", line).strip().split("\t")
-            if title != "total:":
+            if title == "total:":
                 continue
             iname = title.split(repo_name)[-1].split(":")[0]
             if iname[1:] not in diffs:
@@ -48,7 +47,6 @@ def main(coverage_tsv_fname, repo_name, branch_name, diffs):
             title = "[{}]({})".format(iname, url)
             coverage_funcs.append((iname, title, func, percept))
 
-    coverage_funcs = coverage_funcs[:-1]
     coverage_output = Path(coverage_output_file)
 
     with coverage_output.open("w", encoding="utf-8") as fw:
@@ -56,6 +54,7 @@ def main(coverage_tsv_fname, repo_name, branch_name, diffs):
 
         for key, file_group in groupby(coverage_funcs, key=lambda x: x[0]):
             file_group = list(file_group)
+            print(" fgroup is ", file_group)
             mean_percept = statistics.mean(
                 [float(percept[:-1]) for (_, _, _, percept) in file_group]
             )

@@ -8,7 +8,6 @@ import argparse
 coverage_output_file = "coverage_d.md"
 coverage_out_fname = "cover.out"
 repo_name = "go-cover-commenter"
-head_name = "https://github.com/MokkeMeguru"
 
 
 def main(coverage_out_fname, repo_name, branch_name, diffs):
