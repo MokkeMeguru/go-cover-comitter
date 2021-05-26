@@ -23,7 +23,3 @@ jobs:
         with:
           path: coverage.md
           recreate: true
-      - uses: marocchino/sticky-pull-request-comment@v2
-        with:
-          path: coverage_d.md
-          recreate: true
