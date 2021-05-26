@@ -4,7 +4,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"testing"
 
-	"github.com/MokkeMeguru/go-coverage-commenter/internal/domain"
+	"github.com/MokkeMeguru/go-cover-commenter/internal/domain"
 )
 
 func TestSize(t *testing.T) {
