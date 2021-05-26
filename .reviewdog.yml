@@ -1,0 +1,11 @@
+runner:
+  golint:
+    cmd: golint ./...
+    errorformat:
+      - "%f:%l:%c: %m"
+    level: warning
+  coverage:
+    cmd: ./scripts/coverage/coverage.sh feature/size develop && cat coverage_d.md
+    errorformat:
+      - "%f:%l.%c: %m"
+    level: warning
