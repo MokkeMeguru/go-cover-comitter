@@ -26,8 +26,8 @@ def main(coverage_out, coverage_output, owner, repo_name, commit_hash, diffs):
 
     with coverage_output.open("w", encoding="utf-8") as fw:
         fw.write("### Details (no coverage condition) \n")
-
-        for key, file_group in groupby(coverage_infos, key=lambda x: x[1]):
+        fw.write("first line is the position of the no coverage")
+        for _, file_group in groupby(coverage_infos, key=lambda x: x[1]):
             file_group = list(file_group)
             file_group = sorted(file_group, key=lambda x: x[0])
 
