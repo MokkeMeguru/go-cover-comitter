@@ -18,16 +18,12 @@ jobs:
       - run: go version
       - name: build coverage
         run: |
-          sh ./scripts/coverage/coverage.sh ${{ github.head_ref }} ${{ github.base_ref }}
+          sh ./scripts/coverage/coverage.sh $GITHUB_REPOSITORY ${{ github.head_ref }} ${{ github.base_ref }}
       - uses: marocchino/sticky-pull-request-comment@v2
         with:
           path: coverage.md
           recreate: true
-      - uses: reviewdog/action-setup@v1
+      - uses: marocchino/sticky-pull-request-comment@v2
         with:
-          reviewdog_version: latest # Optional. [latest,nightly,v.X.Y.Z]
-      - name: Run reviewdog
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cat coverage_d.md | reviewdog -efm="%f:%l.%c: %m" -diff="git diff origin/${{ github.base_ref }}" -reporter=github-pr-review
+          path: coverage_d.md
+          recreate: true
