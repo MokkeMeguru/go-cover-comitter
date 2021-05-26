@@ -25,7 +25,7 @@ def main(coverage_out, coverage_output, owner, repo_name, commit_hash, diffs):
             coverage_infos.append((occurline, fname))
 
     with coverage_output.open("w", encoding="utf-8") as fw:
-        fw.write("### Details\n")
+        fw.write("### Details (no coverage condition) \n")
 
         for key, file_group in groupby(coverage_infos, key=lambda x: x[1]):
             file_group = list(file_group)
@@ -36,7 +36,7 @@ def main(coverage_out, coverage_output, owner, repo_name, commit_hash, diffs):
             for f in file_group:
                 fw.write(
                     "https://github.com/{}/{}/blob/{}/{}#L{}\n\n".format(
-                        owner, repo_name, commit_hash, fname, int(occurline)
+                        owner, repo_name, commit_hash, fname, int(f[0])
                     )
                 )
             fw.write("</details>\n")
