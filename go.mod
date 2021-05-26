@@ -1,4 +1,4 @@
-module github.com/MokkeMeguru/go-cover-commenter
+module github.com/MokkeMeguru/go-cover-comitter
 
 go 1.16
 
